@@ -132,10 +132,13 @@ python -X utf8 src/eval_cd.py --project_name LEVIR_LiteCDNet_BCEDiceBoundary0.3_
 ## 文档导航
 
 - [文档索引](docs/README.md)
+- [中英双语项目简介](docs/project-overview-bilingual.md)
 - [方法说明](docs/method.md)
 - [复现实验说明](docs/reproducibility.md)
 - [来源说明](docs/attribution.md)
 - [细粒度论文/仓库引用清单](docs/references.md)
+- [LICENSE 选择建议](docs/license-options.md)
+- [首个公开版 Release Notes](docs/release-notes-v1.0.0.md)
 - [第三方代码说明](NOTICE.md)
 
 ## 代码来源与引用
@@ -151,6 +154,18 @@ python -X utf8 src/eval_cd.py --project_name LEVIR_LiteCDNet_BCEDiceBoundary0.3_
 - 文件级论文/仓库映射：见 [docs/references.md](docs/references.md)
 
 如果你使用了本仓库中的具体对比模型，请同时引用对应模型论文或官方仓库；如果你引用的是整个公开整理版仓库，请参考 [CITATION.cff](CITATION.cff)。
+
+## License 建议
+
+当前仓库已经补了引用和来源边界，但还没有直接落一个最终 `LICENSE` 文件，因为这一步有真实法律后果。为了避免误选，我把适合这个仓库的选项、适用场景和不建议场景整理到了 [docs/license-options.md](docs/license-options.md)。
+
+如果你想尽量开放复用，优先考虑 `MIT`。
+如果你希望衍生项目也保持开源公开，优先考虑 `GPL-3.0-only` 或 `GPL-3.0-or-later`。
+如果你暂时只想公开代码供阅读和论文答辩展示，而不准备授权复用，那就先不要补 `LICENSE`，保持默认保留权利也比误选更稳妥。
+
+## Release Notes
+
+首个公开版发布说明已经整理在 [docs/release-notes-v1.0.0.md](docs/release-notes-v1.0.0.md)。如果你后面准备打 tag 或发 GitHub Release，可以直接把里面的内容作为初稿使用。
 
 ## 额外说明
 

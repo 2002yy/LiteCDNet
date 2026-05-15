@@ -39,6 +39,9 @@ docs/*
 !docs/method.md
 !docs/reproducibility.md
 !docs/references.md
+!docs/license-options.md
+!docs/release-notes-v1.0.0.md
+!docs/project-overview-bilingual.md
 
 src/ablation/README.md
 src/compare/README.md
