@@ -120,6 +120,52 @@ python -X utf8 src/eval_cd.py --project_name LEVIR_LiteCDNet_BCEDiceBoundary0.3_
 --data_root D:\datasets
 ```
 
+## LEVIR-CD 主结果
+
+下表整理了论文主结果口径下的 LEVIR-CD 定量结果，用于展示 LiteCDNet 与代表性强基线 SEIFNet 的精度-复杂度折中。
+
+| Model | FLOPs (G) | Params (M) | Acc | mIoU | mF1 | IoU(change) | F1(change) | Precision(change) | Recall(change) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| SEIFNet | 8.37 | 27.91 | 0.97821 | 0.80942 | 0.88507 | 0.64151 | 0.78161 | 0.79851 | 0.76541 |
+| LiteCDNet | 2.14 | 2.47 | 0.97837 | 0.81035 | 0.88575 | 0.64321 | 0.78287 | 0.80127 | 0.76530 |
+
+说明：
+- LiteCDNet 的 FLOPs 和 Params 来自当前项目实现下的本地前向统计。
+- SEIFNet 的 FLOPs 和 Params 用于公开结果对照展示，不应解读为完全同条件复现实验下的严格速度结论。
+
+主结果对照图：
+
+![LEVIR-CD Parameter-IoU Comparison](assets/levir-parameter-iou-comparison.png)
+
+## 复杂度统计与消融
+
+标准 A0-A7 消融实验主要用于分析 LiteCDNet 各关键模块和训练策略的贡献。这里保留一份适合 README 快速浏览的摘要表。
+
+| Code | Setting | Params (M) | FLOPs (G) | Best val mIoU | Best val mF1 | Delta mIoU vs A0 |
+| --- | --- | --- | --- | --- | --- | --- |
+| A0 | Full LiteCDNet | 2.47 | 2.14 | 0.81628 | 0.88959 | — |
+| A1 | `abs_diff` replaces DiffFusion | 2.24 | 2.07 | 0.76093 | 0.84729 | -0.05535 |
+| A2 | Remove LiteContext | 2.23 | 2.05 | 0.81338 | 0.88749 | -0.00290 |
+| A3 | Concat decoder | 2.73 | 2.68 | 0.82246 | 0.89403 | +0.00618 |
+| A4 | Remove boundary loss | 2.47 | 2.14 | 0.79182 | 0.87144 | -0.02446 |
+| A5 | Remove deep supervision | 2.47 | 2.14 | 0.80894 | 0.88425 | -0.00734 |
+| A6 | `boundary=0.5` | 2.47 | 2.14 | 0.80940 | 0.88459 | -0.00688 |
+| A7 | Adjust multi-scale loss weights | 2.47 | 2.14 | 0.81207 | 0.88656 | -0.00421 |
+
+说明：
+- A0-A7 采用的是统一验证集口径，用于模块贡献分析，不等同于上面的 LEVIR-CD 主测试结果表。
+- 从复杂度角度看，A1 和 A2 最轻；A3 的参数量和 FLOPs 明显更高，说明拼接式解码更重。
+
+复杂度总览图：
+
+![LiteCDNet Complexity Overview](assets/complexity-overview.png)
+
+## 预测可视化
+
+下面给出一张公开版单样本预测示意图，方便快速了解模型输出形态。当前仓库不打包大规模可视化结果集，只保留少量 README 展示图。
+
+![LiteCDNet Prediction Example on LEVIR-CD](assets/prediction-example-levir.jpg)
+
 ## 结果与公开边界
 
 - 本仓库不分发训练好的 checkpoint
