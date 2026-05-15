@@ -139,6 +139,13 @@ python -X utf8 src/eval_cd.py --project_name LEVIR_LiteCDNet_BCEDiceBoundary0.3_
 - [首个公开版 Release Notes](docs/release-notes-v1.0.0.md)
 - [第三方代码说明](NOTICE.md)
 
+## 公开论文
+
+仓库中提供了一份适合公开分发的论文副本，已去除封面与摘要页中的个人信息：
+
+- [公开版论文 DOCX](publications/LiteCDNet_thesis_public_redacted.docx)
+- [公开版论文 PDF](publications/LiteCDNet_thesis_public_redacted.pdf)
+
 ## 代码来源与引用
 
 本仓库中的代码由三部分组成：

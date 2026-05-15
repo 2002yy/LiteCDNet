@@ -33,6 +33,10 @@ boundary_05_log_before_cleanup_20260421.txt
 *.pptx
 *.zip
 
+!publications/
+!publications/LiteCDNet_thesis_public_redacted.docx
+!publications/LiteCDNet_thesis_public_redacted.pdf
+
 docs/*
 !docs/README.md
 !docs/attribution.md
