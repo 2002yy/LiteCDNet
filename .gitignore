@@ -38,6 +38,7 @@ docs/*
 !docs/attribution.md
 !docs/method.md
 !docs/reproducibility.md
+!docs/references.md
 
 src/ablation/README.md
 src/compare/README.md

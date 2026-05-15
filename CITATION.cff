@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: LiteCDNet
+message: "If you use this repository, please cite the repository itself and the corresponding upstream papers listed in docs/references.md."
+type: software
+authors:
+  - family-names: Zhang
+    given-names: Yuanyao
+    alias: 2002yy
+repository-code: "https://github.com/2002yy/LiteCDNet"
+url: "https://github.com/2002yy/LiteCDNet"
+abstract: "Public release of the LiteCDNet graduation-project codebase for remote sensing change detection experiments, including training, evaluation, ablation, and baseline integration."
+keywords:
+  - remote sensing
+  - change detection
+  - pytorch
+  - litecdnet
+  - experiment reproducibility
