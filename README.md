@@ -127,8 +127,6 @@ python -X utf8 src/eval_cd.py --project_name LEVIR_LiteCDNet_BCEDiceBoundary0.3_
 - 这些目录默认被 `.gitignore` 忽略，避免公开仓库膨胀
 - README 仅保留少量展示图，完整论文图表与答辩材料不在公开版中提供
 
-![Qualitative Results](assets/qualitative-results.png)
-
 ## 文档导航
 
 - [文档索引](docs/README.md)
