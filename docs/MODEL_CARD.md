@@ -29,3 +29,22 @@ Academic reproduction, lightweight change detection experiments, ablation study 
 - No checkpoint is redistributed.
 - Results depend on dataset split and training environment.
 - The repository is for research and portfolio demonstration, not production deployment.
+
+## Architecture Summary
+
+- Shared MobileNetV2 encoder
+- DiffFusion
+- LiteContextModule
+- Add-based decoder
+- Multi-scale deep supervision
+- CE + Dice + Boundary Loss
+
+## Reproduction Notes
+
+- Dataset should be prepared manually.
+- Checkpoints are not redistributed.
+- Main scripts are listed in README and docs/reproducibility.md.
+
+## Portfolio Value
+
+This repository demonstrates PyTorch training/evaluation organization, ablation design, metric reporting and public reproducibility cleanup.
