@@ -46,6 +46,7 @@ docs/*
 !docs/license-options.md
 !docs/release-notes-v1.0.0.md
 !docs/project-overview-bilingual.md
+!docs/MODEL_CARD.md
 
 src/ablation/README.md
 src/compare/README.md

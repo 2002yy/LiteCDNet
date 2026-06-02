@@ -35,6 +35,16 @@ LiteCDNet 是一个面向遥感变化检测实验的公开整理版仓库，聚�
 
 对于只想快速了解仓库结构的读者，可以先阅读本页的主结果、复杂度统计和可视化部分；对于准备复现训练的读者，建议进一步阅读 `docs/reproducibility.md`。
 
+## Reproduce in 10 Minutes
+
+1. Prepare Python environment.
+2. Put LEVIR-CD under `data/LEVIR`.
+3. Run main training script.
+4. Run evaluation script.
+5. Compare metrics with README table.
+
+See `docs/reproducibility.md` for details.
+
 ## Code Map
 
 下面列出最核心的公开入口，方便第一次进入仓库时快速定位：
