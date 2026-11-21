@@ -5,6 +5,7 @@ import torch
 
 from models.networks import *
 from misc.metric_tool import ConfuseMatrixMeter
+from models.checkpoint_io import load_checkpoint
 from misc.logger_tool import Logger
 from utils_ import de_norm
 import utils_
@@ -56,22 +57,10 @@ class CDEvaluator():
         if os.path.exists(ckpt_path):
             self.logger.write(f'Loading checkpoint: {ckpt_path}...\n')
             
-            # 2. 尝试安全加载
-            try:
-                checkpoint = torch.load(
-                    ckpt_path,
-                    map_location=self.device,
-                    weights_only=True
-                )
-            # 3. 如果安全加载失败，回退到非安全加载
-            except Exception as e:
-                print("⚠️ weights_only=True failed, fallback to unsafe load")
-                checkpoint = torch.load(
-                    ckpt_path,
-                    map_location=self.device,
-                    weights_only=False
-                )
-            
+            # Use the same weights-only contract as training resume.
+            # Legacy NumPy scalar mF1 is allowlisted narrowly; never unsafe pickle.
+            checkpoint = load_checkpoint(ckpt_path, map_location=self.device)
+
             # 4. 加载权重并记录信息 (这部分必须和 try/except 处于同一缩进层级)
             self.net_G.load_state_dict(checkpoint['model_G_state_dict'])
             
