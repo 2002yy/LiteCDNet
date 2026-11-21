@@ -13,6 +13,7 @@ from misc.metric_tool import ConfuseMatrixMeter
 from models.losses import cross_entropy, FocalLoss,BoundaryLoss,Boundary_ce_loss,Focal_Dice_BL,FocalLoss_with_dice,BCEDiceLoss
 
 
+from models.checkpoint_io import load_checkpoint, save_checkpoint
 from misc.logger_tool import Logger, Timer
 
 from utils_ import de_norm
@@ -143,8 +144,10 @@ class CDTrainer():
         if os.path.exists(os.path.join(self.checkpoint_dir, ckpt_name)):
             self.logger.write('loading last checkpoint...\n')
             # load the entire checkpoint
-            checkpoint = torch.load(os.path.join(self.checkpoint_dir, ckpt_name),
-                                    map_location=self.device)
+            checkpoint = load_checkpoint(
+                os.path.join(self.checkpoint_dir, ckpt_name),
+                map_location=self.device,
+            )
             # update net_G states
             self.net_G.load_state_dict(checkpoint['model_G_state_dict'])
 
@@ -185,16 +188,17 @@ class CDTrainer():
 
     def _save_checkpoint(self, ckpt_name):
         payload = {
-            'epoch_id': self.epoch_id,
-            'best_val_acc': self.best_val_acc,
-            'best_epoch_id': self.best_epoch_id,
+            'epoch_id': int(self.epoch_id),
+            # NumPy mF1 (np.float64) is not a weights-only primitive.
+            'best_val_acc': float(self.best_val_acc),
+            'best_epoch_id': int(self.best_epoch_id),
             'model_G_state_dict': self.net_G.state_dict(),
             'optimizer_G_state_dict': self.optimizer_G.state_dict(),
             'exp_lr_scheduler_G_state_dict': self.exp_lr_scheduler_G.state_dict(),
         }
         if self.use_amp:
             payload['scaler_state_dict'] = self.scaler.state_dict()
-        torch.save(payload, os.path.join(self.checkpoint_dir, ckpt_name))
+        save_checkpoint(os.path.join(self.checkpoint_dir, ckpt_name), payload)
 
     def _update_lr_schedulers(self):
         self.exp_lr_scheduler_G.step()
