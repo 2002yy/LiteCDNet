@@ -1,6 +1,7 @@
 name: Checkpoint safety
 
 on:
+  workflow_dispatch:
   pull_request:
     branches: [master]
     paths:
