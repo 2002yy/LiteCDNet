@@ -185,12 +185,12 @@ data/
 └─ WHU-CUT/
 ```
 
-数据路径可以通过以下任一方式指定（优先级递增）：
+数据路径按以下**从高到低**的优先级解析：
 
-1. 默认结构 `data/`（仓库根目录下）
-2. `--data_root <你的数据目录>`
-3. 环境变量 `LITECDNET_DATA_ROOT`
-4. 单数据集环境变量 `LITECDNET_LEVIR_ROOT` 等
+1. `--data_root <单个数据集目录>`：直接指向该数据集根目录（例如 `D:\\datasets\\LEVIR`）。
+2. 单数据集环境变量 `LITECDNET_LEVIR_ROOT` 等：同样直接指向该数据集目录。
+3. `LITECDNET_DATA_ROOT`：指向**全部数据集的父目录**（例如 `D:\\datasets`），程序会追加 `LEVIR`、`DSIFN_256` 等对应目录名。
+4. 默认使用仓库内 `data/<对应数据集目录>`。
 
 示例：
 

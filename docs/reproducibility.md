@@ -24,9 +24,9 @@ data/WHU-CUT
 
 也可以使用：
 
-- `--data_root <path>`
-- `LITECDNET_DATA_ROOT`
-- `LITECDNET_<DATASET>_ROOT`
+- `--data_root <path>`：单个数据集的完整根目录（最高优先级）
+- `LITECDNET_<DATASET>_ROOT`：单个数据集的完整根目录
+- `LITECDNET_DATA_ROOT`：多个数据集的**父目录**，程序按 `data_config.py` 映射追加 `LEVIR`、`DSIFN_256` 等子目录；默认仍是仓库内 `data/`
 
 例如：
 

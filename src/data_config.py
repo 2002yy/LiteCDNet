@@ -47,13 +47,17 @@ class DataConfig:
             raise TypeError(f"{data_name} has not defined")
 
         env_name = f"LITECDNET_{_normalize_dataset_name(data_name)}_ROOT"
-        resolved_root = (
-            root_dir
-            or os.getenv(env_name)
-            or os.getenv("LITECDNET_DATA_ROOT")
-            or str(_default_dataset_root(data_name))
-        )
-        self.root_dir = str(Path(resolved_root).expanduser())
+        dataset_root = root_dir or os.getenv(env_name)
+        if dataset_root:
+            resolved_root = Path(dataset_root).expanduser()
+        else:
+            data_base = os.getenv("LITECDNET_DATA_ROOT")
+            resolved_root = (
+                Path(data_base).expanduser() / DATASET_PATHS[data_name]
+                if data_base
+                else _default_dataset_root(data_name)
+            )
+        self.root_dir = str(resolved_root)
         return self
 
 
