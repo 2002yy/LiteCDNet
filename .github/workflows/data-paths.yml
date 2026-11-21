@@ -1,0 +1,28 @@
+name: Dataset path resolution
+
+on:
+  push:
+    paths:
+      - 'src/data_config.py'
+      - 'tests/test_data_config.py'
+      - '.github/workflows/data-paths.yml'
+  pull_request:
+    paths:
+      - 'src/data_config.py'
+      - 'tests/test_data_config.py'
+      - '.github/workflows/data-paths.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  data-paths:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check dataset root contracts
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
