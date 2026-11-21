@@ -3,7 +3,6 @@ name: Checkpoint safety
 on:
   workflow_dispatch:
   pull_request:
-    branches: [master]
     paths:
       - "src/models/checkpoint_io.py"
       - "src/models/trainer.py"
@@ -11,7 +10,6 @@ on:
       - "tests/test_checkpoint_io.py"
       - ".github/workflows/checkpoint-safety.yml"
   push:
-    branches: [master]
     paths:
       - "src/models/checkpoint_io.py"
       - "src/models/trainer.py"
