@@ -1,6 +1,7 @@
 """CPU-only safety and crash-consistency checks for checkpoint I/O."""
 from __future__ import annotations
 
+import pickle
 import tempfile
 import unittest
 from pathlib import Path
@@ -53,7 +54,7 @@ class CheckpointIOTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / "untrusted.pt"
             torch.save({"arbitrary_object": UnsupportedLegacyObject()}, path)
-            with self.assertRaises((Exception,)):
+            with self.assertRaises(pickle.UnpicklingError):
                 checkpoint_io.load_checkpoint(path, map_location="cpu")
 
     def test_replace_failure_preserves_previous_checkpoint_and_cleans_temp(self):
