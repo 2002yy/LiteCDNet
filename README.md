@@ -266,9 +266,12 @@ python -X utf8 src/eval_cd.py --project_name LEVIR_LiteCDNet_BCEDiceBoundary0.3_
 
 ## 6. Testing / CI
 
-**待补充。** 仓库当前以训练脚本的直接运行作为验证手段，尚未引入自动化测试框架与 CI 流水线。
+已接入两条 GitHub Actions 自动化验证，但尚未覆盖完整训练、GPU 推理或真实数据集端到端复现：
 
-自动化测试与持续集成待后续版本补充。
+- [Python source and dataset contracts](.github/workflows/data-paths.yml)：对 `src/` 和 `tests/` 的所有 Python 文件进行 `compileall` 语法检查，并运行 `tests/test_data_config.py`，验证数据根目录及环境变量优先级。无需下载数据集或安装 PyTorch。
+- [Checkpoint safety](.github/workflows/checkpoint-safety.yml)：在 CPU PyTorch 环境中运行 `tests/test_checkpoint_io.py`，验证安全加载、原子替换失败回滚以及临时文件清理。
+
+两套检查各守一个职责，避免在轻量级数据路径任务中重复运行需要 PyTorch 的 checkpoint 测试。模型精度与论文结果仍需按 [复现指南](docs/reproducibility.md) 完整运行验证。
 
 ## 7. Release / Download
 
@@ -309,7 +312,8 @@ python -X utf8 src/eval_cd.py --project_name LEVIR_LiteCDNet_BCEDiceBoundary0.3_
 - [x] LICENSE 选择建议与分析
 - [x] 首个公开版 Release (v1.0.0)
 
-- [ ] 补充自动化测试与 CI 流水线
+- [x] 基础 Python 语法、数据路径与 checkpoint 安全测试 CI
+- [ ] 增加训练/推理与消融结果的端到端验证（需合适的运行环境）
 - [ ] 提供预训练 Checkpoint 下载链接
 - [ ] 细化更多数据集的训练配置示例
 - [ ] 增加预测结果批量可视化脚本
