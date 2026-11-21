@@ -26,8 +26,9 @@ class DataConfigTest(unittest.TestCase):
 
     def test_specific_root_precedence_does_not_append_dataset_name(self):
         with tempfile.TemporaryDirectory() as base:
-            with patch.dict(os.environ, {"LITECDNET_DATA_ROOT": "/shared", "LITECDNET_LEVIR_ROOT": "/specific/LEVIR"}, clear=True):
-                self.assertEqual(DataConfig().get_data_config("LEVIR").root_dir, "/specific/LEVIR")
+            specific = str(Path(base) / "direct" / "LEVIR")
+            with patch.dict(os.environ, {"LITECDNET_DATA_ROOT": base, "LITECDNET_LEVIR_ROOT": specific}, clear=True):
+                self.assertEqual(DataConfig().get_data_config("LEVIR").root_dir, specific)
                 self.assertEqual(DataConfig().get_data_config("LEVIR", root_dir=base).root_dir, base)
 
     def test_unknown_dataset_remains_rejected(self):
